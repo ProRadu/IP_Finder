@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">IP Finder</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="app_title">IP Finder</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signup">Sign up</string>
+    <string name="click_to_login">Click to login</string>
+    <string name="click_to_signup">Click to sign up</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="goToLocationFinderService">Find location using IP</string>
+    <string name="tutorialURL"><![CDATA["https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"]]></string>
+    <string name="videoTutorial">Watch video tutorial</string>
+    <string name="title_activity_tutorial_video">TutorialVideoActivity</string>
+</resources>
