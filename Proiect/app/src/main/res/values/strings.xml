@@ -18,4 +18,5 @@
     <string name="tutorialURL"><![CDATA["https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"]]></string>
     <string name="videoTutorial">Watch video tutorial</string>
     <string name="title_activity_tutorial_video">TutorialVideoActivity</string>
+    <string name="user_profile">User Profile</string>
 </resources>

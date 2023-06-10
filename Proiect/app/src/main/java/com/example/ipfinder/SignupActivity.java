@@ -15,11 +15,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -31,6 +39,13 @@ public class SignupActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView textView;
+
+    private FirebaseFirestore fStore;
+
+    private String userID;
+
+    public static final String TAG = "TAG";
+
 
 
     @Override
@@ -50,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         mAuth=FirebaseAuth.getInstance();
-
+        fStore =FirebaseFirestore.getInstance();
 
         editTextEmail=findViewById(R.id.email);
         editTextPassword=findViewById(R.id.password);
@@ -96,6 +111,26 @@ public class SignupActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
+
+                                    userID = mAuth.getCurrentUser().getUid();
+
+                                    DocumentReference documentReference = fStore.collection("users").document(userID);
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("email", email);
+                                    user.put("password", password);
+
+                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.d(TAG, "onSucces: user Profile is created for "+ userID);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(TAG, "onFailure: "+e.toString());
+                                        }
+                                    });
+
                                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                                     startActivity(intent);
                                     finish();
